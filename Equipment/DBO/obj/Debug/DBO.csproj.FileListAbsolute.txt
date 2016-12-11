@@ -1,0 +1,9 @@
+F:\Source\IoT\Equipment\DBO\bin\Debug\DBO.dll
+F:\Source\IoT\Equipment\DBO\bin\Debug\DBO.pdb
+F:\Source\IoT\Equipment\DBO\bin\Debug\mysql.data.dll
+F:\Source\IoT\Equipment\DBO\obj\Debug\DBO.csprojResolveAssemblyReference.cache
+F:\Source\IoT\Equipment\DBO\obj\Debug\DBO.dll
+F:\Source\IoT\Equipment\DBO\obj\Debug\DBO.pdb
+F:\Source\IoT\Equipment\DBO\bin\Debug\Common.dll
+F:\Source\IoT\Equipment\DBO\bin\Debug\log4net.dll
+F:\Source\IoT\Equipment\DBO\bin\Debug\Common.pdb

@@ -1,0 +1,11 @@
+F:\Source\IoT\Equipment\Business\bin\Release\Business.dll
+F:\Source\IoT\Equipment\Business\bin\Release\Business.pdb
+F:\Source\IoT\Equipment\Business\bin\Release\DBO.dll
+F:\Source\IoT\Equipment\Business\bin\Release\MySql.Data.dll
+F:\Source\IoT\Equipment\Business\bin\Release\Common.dll
+F:\Source\IoT\Equipment\Business\bin\Release\log4net.dll
+F:\Source\IoT\Equipment\Business\bin\Release\DBO.pdb
+F:\Source\IoT\Equipment\Business\bin\Release\Common.pdb
+F:\Source\IoT\Equipment\Business\obj\Release\Business.csprojResolveAssemblyReference.cache
+F:\Source\IoT\Equipment\Business\obj\Release\Business.dll
+F:\Source\IoT\Equipment\Business\obj\Release\Business.pdb
