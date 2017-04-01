@@ -1,0 +1,16 @@
+F:\Source\IoT\Equipment\WpfApp\bin\Release\WpfApp.exe.config
+F:\Source\IoT\Equipment\WpfApp\bin\Release\WpfApp.exe
+F:\Source\IoT\Equipment\WpfApp\bin\Release\WpfApp.pdb
+F:\Source\IoT\Equipment\WpfApp\obj\Release\WpfApp.csprojResolveAssemblyReference.cache
+F:\Source\IoT\Equipment\WpfApp\obj\Release\MainWindow.g.cs
+F:\Source\IoT\Equipment\WpfApp\obj\Release\OnOff.g.cs
+F:\Source\IoT\Equipment\WpfApp\obj\Release\App.g.cs
+F:\Source\IoT\Equipment\WpfApp\obj\Release\WpfApp_MarkupCompile.cache
+F:\Source\IoT\Equipment\WpfApp\obj\Release\WpfApp_MarkupCompile.lref
+F:\Source\IoT\Equipment\WpfApp\obj\Release\MainWindow.baml
+F:\Source\IoT\Equipment\WpfApp\obj\Release\OnOff.baml
+F:\Source\IoT\Equipment\WpfApp\obj\Release\WpfApp.g.resources
+F:\Source\IoT\Equipment\WpfApp\obj\Release\WpfApp.Properties.Resources.resources
+F:\Source\IoT\Equipment\WpfApp\obj\Release\WpfApp.csproj.GenerateResource.Cache
+F:\Source\IoT\Equipment\WpfApp\obj\Release\WpfApp.exe
+F:\Source\IoT\Equipment\WpfApp\obj\Release\WpfApp.pdb

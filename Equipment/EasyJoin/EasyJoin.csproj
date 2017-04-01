@@ -101,32 +101,75 @@
   <ItemGroup>
     <Content Include="bin\AspNet.ScriptManager.jQuery.dll" />
     <Content Include="CreateImgCode.aspx" />
-    <Content Include="CSS\fd-slider-tooltip.css" />
-    <Content Include="CSS\fd-slider.css" />
-    <Content Include="CSS\main.css" />
-    <Content Include="CSS\prettify.css" />
+    <Content Include="CSS\fd-slider-tooltip.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CSS\fd-slider.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CSS\main.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CSS\prettify.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Default.aspx" />
     <Content Include="EasyJoin.aspx" />
+    <Content Include="EasyJoinService.asmx" />
+    <Content Include="Image\B.jpg" />
     <Content Include="Image\bg.png" />
-    <Content Include="index.html" />
-    <Content Include="Js\excanvas.compiled.js" />
-    <Content Include="Js\fd-slider.js" />
-    <Content Include="Js\gauge.js" />
-    <Content Include="Js\gauge.min.js" />
-    <Content Include="Js\highcharts.js" />
+    <Content Include="Js\excanvas.compiled.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\fd-slider.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\gauge.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\gauge.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\highcharts.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Js\jquery-1.4.4.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Js\jquery-1.5.2.min.js" />
-    <Content Include="Js\jquery-1.7.2.min.js" />
-    <Content Include="Js\jquery-3.1.1.min.js" />
+    <Content Include="Js\jquery-1.5.2.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\jquery-1.7.2.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\jquery-3.1.1.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Js\jquery.messager.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Js\jscolor.js" />
-    <Content Include="Js\prettify.js" />
+    <Content Include="Js\jscolor.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\prettify.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\theme\dark-blue.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\theme\dark-green.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\theme\gray.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Js\theme\grid.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Map.aspx" />
     <Content Include="MonitorData.txt" />
     <Content Include="MonitorListManage.aspx" />
+    <Content Include="Navigation.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -134,6 +177,8 @@
     <Content Include="AlamInfo.ashx" />
     <Content Include="Monitor.ashx" />
     <Content Include="MonitorData.ashx" />
+    <Content Include="GetParkingState.ashx" />
+    <Content Include="GetParkingOccupy.ashx" />
     <None Include="Properties\PublishProfiles\web.config.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -143,9 +188,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Default.aspx" />
-    <Content Include="scripts\ai.0.22.19-build00125.js" />
-    <Content Include="scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="AddMonitor.aspx" />
+    <Content Include="ParkingOccupy.aspx" />
+    <Content Include="ParkingVacant.aspx" />
+    <Content Include="scripts\ai.0.22.19-build00125.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\ai.0.22.19-build00125.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ShowChart.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -156,6 +207,13 @@
     <Compile Include="CreateImgCode.aspx.cs">
       <DependentUpon>CreateImgCode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMonitor.aspx.cs">
+      <DependentUpon>AddMonitor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMonitor.aspx.designer.cs">
+      <DependentUpon>AddMonitor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -170,6 +228,16 @@
     </Compile>
     <Compile Include="EasyJoin.aspx.designer.cs">
       <DependentUpon>EasyJoin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EasyJoinService.asmx.cs">
+      <DependentUpon>EasyJoinService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GetParkingOccupy.ashx.cs">
+      <DependentUpon>GetParkingOccupy.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="GetParkingState.ashx.cs">
+      <DependentUpon>GetParkingState.ashx</DependentUpon>
     </Compile>
     <Compile Include="Map.aspx.cs">
       <DependentUpon>Map.aspx</DependentUpon>
@@ -191,6 +259,23 @@
     <Compile Include="MonitorListManage.aspx.designer.cs">
       <DependentUpon>MonitorListManage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ParkingButton.cs" />
+    <Compile Include="ParkingOccupy.aspx.cs">
+      <DependentUpon>ParkingOccupy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParkingOccupy.aspx.designer.cs">
+      <DependentUpon>ParkingOccupy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ParkingOccupyEntity.cs" />
+    <Compile Include="ParkingStateEntity.cs" />
+    <Compile Include="ParkingVacant.aspx.cs">
+      <DependentUpon>ParkingVacant.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParkingVacant.aspx.designer.cs">
+      <DependentUpon>ParkingVacant.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowChart.aspx.cs">
       <DependentUpon>ShowChart.aspx</DependentUpon>
@@ -200,10 +285,7 @@
       <DependentUpon>ShowChart.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Class\" />
-    <Folder Include="Js\theme\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">
       <Project>{ed96e12a-583a-4f4a-b126-018359080d3a}</Project>

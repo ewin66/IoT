@@ -1,0 +1,9 @@
+F:\Source\IoT\Equipment\PLGS\bin\Release\PLGS.exe.config
+F:\Source\IoT\Equipment\PLGS\bin\Release\PLGS.exe
+F:\Source\IoT\Equipment\PLGS\bin\Release\PLGS.pdb
+F:\Source\IoT\Equipment\PLGS\obj\Release\PLGS.csprojResolveAssemblyReference.cache
+F:\Source\IoT\Equipment\PLGS\obj\Release\PLGS.Form1.resources
+F:\Source\IoT\Equipment\PLGS\obj\Release\PLGS.Properties.Resources.resources
+F:\Source\IoT\Equipment\PLGS\obj\Release\PLGS.csproj.GenerateResource.Cache
+F:\Source\IoT\Equipment\PLGS\obj\Release\PLGS.exe
+F:\Source\IoT\Equipment\PLGS\obj\Release\PLGS.pdb

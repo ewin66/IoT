@@ -1,0 +1,9 @@
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\EParking.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\Java.Interop.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\Mono.Android.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\System.Core.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\System.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\System.Xml.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\mscorlib.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\System.Runtime.Serialization.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Release\android\assets\System.ServiceModel.Internals.dll

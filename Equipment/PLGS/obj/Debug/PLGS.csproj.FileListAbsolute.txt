@@ -1,0 +1,8 @@
+F:\Source\IoT\Equipment\PLGS\bin\Debug\PLGS.exe.config
+F:\Source\IoT\Equipment\PLGS\bin\Debug\PLGS.exe
+F:\Source\IoT\Equipment\PLGS\bin\Debug\PLGS.pdb
+F:\Source\IoT\Equipment\PLGS\obj\Debug\PLGS.Form1.resources
+F:\Source\IoT\Equipment\PLGS\obj\Debug\PLGS.Properties.Resources.resources
+F:\Source\IoT\Equipment\PLGS\obj\Debug\PLGS.csproj.GenerateResource.Cache
+F:\Source\IoT\Equipment\PLGS\obj\Debug\PLGS.exe
+F:\Source\IoT\Equipment\PLGS\obj\Debug\PLGS.pdb

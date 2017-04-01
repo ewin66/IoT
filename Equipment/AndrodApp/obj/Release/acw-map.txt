@@ -1,0 +1,4 @@
+AndrodApp.MainActivity, EParking;md59d3ec67f98111730e74b2658f8d1a536.MainActivity
+AndrodApp.MainActivity, EParking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md59d3ec67f98111730e74b2658f8d1a536.MainActivity
+AndrodApp.MainActivity;md59d3ec67f98111730e74b2658f8d1a536.MainActivity
+androdapp.MainActivity;md59d3ec67f98111730e74b2658f8d1a536.MainActivity

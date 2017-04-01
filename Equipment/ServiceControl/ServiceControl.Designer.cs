@@ -43,6 +43,12 @@
             this.txtComm = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ckbClearData = new System.Windows.Forms.CheckBox();
+            this.txtDB = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.rdbNet = new System.Windows.Forms.RadioButton();
+            this.rdb485 = new System.Windows.Forms.RadioButton();
+            this.cmbPort = new System.Windows.Forms.ComboBox();
+            this.btnOpenport = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +111,7 @@
             this.btnStop.TabIndex = 1;
             this.btnStop.Text = "停止";
             this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Visible = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // listLog
@@ -120,6 +127,8 @@
             // ckbMessage
             // 
             this.ckbMessage.AutoSize = true;
+            this.ckbMessage.Checked = true;
+            this.ckbMessage.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbMessage.Location = new System.Drawing.Point(13, 71);
             this.ckbMessage.Name = "ckbMessage";
             this.ckbMessage.Size = new System.Drawing.Size(72, 16);
@@ -129,7 +138,7 @@
             // 
             // txtComm
             // 
-            this.txtComm.Location = new System.Drawing.Point(107, 226);
+            this.txtComm.Location = new System.Drawing.Point(168, 226);
             this.txtComm.Name = "txtComm";
             this.txtComm.Size = new System.Drawing.Size(350, 21);
             this.txtComm.TabIndex = 4;
@@ -138,7 +147,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(48, 230);
+            this.label1.Location = new System.Drawing.Point(113, 230);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 5;
@@ -147,6 +156,8 @@
             // ckbClearData
             // 
             this.ckbClearData.AutoSize = true;
+            this.ckbClearData.Checked = true;
+            this.ckbClearData.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbClearData.Location = new System.Drawing.Point(13, 94);
             this.ckbClearData.Name = "ckbClearData";
             this.ckbClearData.Size = new System.Drawing.Size(96, 16);
@@ -154,11 +165,74 @@
             this.ckbClearData.Text = "自动清理数据";
             this.ckbClearData.UseVisualStyleBackColor = true;
             // 
+            // txtDB
+            // 
+            this.txtDB.Location = new System.Drawing.Point(630, 226);
+            this.txtDB.Name = "txtDB";
+            this.txtDB.Size = new System.Drawing.Size(100, 21);
+            this.txtDB.TabIndex = 7;
+            this.txtDB.Text = "192.168.1.222";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(547, 230);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 12);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "数据库服务器";
+            // 
+            // rdbNet
+            // 
+            this.rdbNet.AutoSize = true;
+            this.rdbNet.Location = new System.Drawing.Point(13, 126);
+            this.rdbNet.Name = "rdbNet";
+            this.rdbNet.Size = new System.Drawing.Size(71, 16);
+            this.rdbNet.TabIndex = 9;
+            this.rdbNet.Text = "网络传输";
+            this.rdbNet.UseVisualStyleBackColor = true;
+            // 
+            // rdb485
+            // 
+            this.rdb485.AutoSize = true;
+            this.rdb485.Checked = true;
+            this.rdb485.Location = new System.Drawing.Point(12, 148);
+            this.rdb485.Name = "rdb485";
+            this.rdb485.Size = new System.Drawing.Size(71, 16);
+            this.rdb485.TabIndex = 10;
+            this.rdb485.TabStop = true;
+            this.rdb485.Text = "串口直连";
+            this.rdb485.UseVisualStyleBackColor = true;
+            // 
+            // cmbPort
+            // 
+            this.cmbPort.FormattingEnabled = true;
+            this.cmbPort.Location = new System.Drawing.Point(12, 170);
+            this.cmbPort.Name = "cmbPort";
+            this.cmbPort.Size = new System.Drawing.Size(89, 20);
+            this.cmbPort.TabIndex = 11;
+            // 
+            // btnOpenport
+            // 
+            this.btnOpenport.Location = new System.Drawing.Point(12, 197);
+            this.btnOpenport.Name = "btnOpenport";
+            this.btnOpenport.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenport.TabIndex = 12;
+            this.btnOpenport.Text = "打开端口";
+            this.btnOpenport.UseVisualStyleBackColor = true;
+            this.btnOpenport.Click += new System.EventHandler(this.btnOpenport_Click);
+            // 
             // ServiceControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(742, 275);
+            this.Controls.Add(this.btnOpenport);
+            this.Controls.Add(this.cmbPort);
+            this.Controls.Add(this.rdb485);
+            this.Controls.Add(this.rdbNet);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtDB);
             this.Controls.Add(this.ckbClearData);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtComm);
@@ -191,5 +265,11 @@
         private System.Windows.Forms.TextBox txtComm;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox ckbClearData;
+        private System.Windows.Forms.TextBox txtDB;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton rdbNet;
+        private System.Windows.Forms.RadioButton rdb485;
+        private System.Windows.Forms.ComboBox cmbPort;
+        private System.Windows.Forms.Button btnOpenport;
     }
 }

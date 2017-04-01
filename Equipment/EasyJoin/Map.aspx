@@ -7,8 +7,7 @@
     <title>智能水位监测系统</title> 
     <link href="CSS/main.css" type="text/css" rel="stylesheet"/>
     <script src="js/jquery-1.7.2.min.js"></script>
-	<script src="Js/global.js" ></script> 
-    
+	<script src="Js/global.js" ></script>     
     <script type="text/javascript" src="js/highcharts.js"></script>
     <%--取消下面注释就可以在右上角看到效果--%>
     <%--<script type="text/javascript" src="download/exporting.js" charset="gb2312"></script>--%>
@@ -25,8 +24,17 @@
                     plotBorderWidth: null,
                     defaultSeriesType: 'line'
                 },
+                legend:{
+                    layout: 'horizontal',
+                    verticalAlign: 'top',
+                    align: 'right',
+                    floating:true,
+                    x: 0,
+                    y: -15
+                    },
                 title: {
-                    text: '水位曲线图'
+                    align: 'left',
+                    text: '实时水位'
                 },
                 subtitle: {
                     text: ''
@@ -35,6 +43,7 @@
                     load : st// 定时器
                 },
                 xAxis: {//X轴数据
+                    tickInterval:1,
                     categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
                     labels: {
                         rotation: -10, //字体倾斜
@@ -62,9 +71,11 @@
                     }
                 },
                 series: [                    
-                {
-                    name: '数贸大厦监测点',
-                    data: []}]
+                //{
+                //    name: '数贸大厦监测点',
+                //    data: []
+                //}
+                ]
                 });
         });
         //setInterval(ShowChartData, 3000);
@@ -93,43 +104,97 @@
 
         function ShowChartData(charData)
         {
-            for (i = 0; i < chart.series.length; i++)
+            if (chart.series.length < 4)
             {
-                if (chart.series[i].name == charData.Name)
+                var blHas=false;
+                for (i = 0; i < chart.series.length; i++)
                 {
-                    if (sdata.length >= 12) {
-                        sdata.shift();//移除最前一个元素并返回该元素值，数组中元素自动前移
-                        sdata.push(charData.Value);// 将一个或多个新元素添加到数组结尾，并返回数组新长度
-                        chart.series[0].setData(sdata);
-                    }
-                    else {
-                        sdata.push(charData.Value);
-                        chart.series[0].setData(sdata);
+                    if (chart.series[i].name == charData.Name)
+                    {
+                        blHas=true;
+                        break;
                     }
                 }
+
+                //如果Serie数小于5并且没有相应的Serie，则添加新Serie
+                if (!blHas) {
+                    chart.addSeries({id:chart.series.length,name:charData.Name,data:[]},true,false);
+                }
             }
+            //开始设置Serie的值
+            for (j = 0; j < chart.series.length; j++)
+            {
+                if (chart.series[j].name == charData.Name) {
+                    var blHave = false;
+                    var index = 0;
+                    for (k = 0; k < chartSerie.length; k++) {
+                        if (chartSerie[k].Name == charData.Name) {
+                            blHave = true;
+                            index = k;
+                            break;
+                        }
+                    }
+                    if (blHave) {
+                        if (chartSerie[index].Datas.length >= 12) {
+                            chartSerie[index].Datas.shift();//移除最前一个元素并返回该元素值，数组中元素自动前移
+                            chartSerie[index].Datas.push(charData.Value);// 将一个或多个新元素添加到数组结尾，并返回数组新长度
+                        }
+                        else {
+                            chartSerie[index].Datas.push(charData.Value);
+                        }
+                        chart.series[j].setData(chartSerie[index].Datas);
+                    }
+                    else {
+                        chartSerie.push(new ChartSerieData(charData.Name, [charData.Value]));
+                        chart.series[j].setData(chartSerie[index].Datas);
+                    }
+                    //if (sdata.length >= 12) {
+                    //    sdata.shift();//移除最前一个元素并返回该元素值，数组中元素自动前移
+                    //    sdata.push(charData.Value);// 将一个或多个新元素添加到数组结尾，并返回数组新长度
+                    //    chart.series[j].setData(sdata);
+                    //}
+                    //else {
+                    //    sdata.push(charData.Value);
+                    //    chart.series[j].setData(sdata);
+                    //}
+                }
+            }
+        }
+
+        function ChartData(name, value) {
+            this.Name = name;
+            this.Value = value;
+            return this;
+        }
+
+        function ChartSerieData(name, data) {
+            this.Name = name;
+            this.Datas = data;
+            return this;
         }
     </script> 
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="div_logo">聚云城市积水智能监测排水系统</div>
+    <div id="div_logo">城市积水智能监测排水系统</div>
     <div id="div_Menu">
+        <span class="Menu" onclick="javascript:window.open('map.aspx'); ">实时数据</span>
+        <span class="Menu" onclick="javascript:window.open('map.aspx'); ">调度中心</span>
+        <span class="Menu" onclick="javascript:window.open('map.aspx'); ">统计报表</span>
         <span class="Menu" onclick="javascript:window.open('EasyJoin.aspx'); ">快速接入</span>
-        <span class="Menu" onclick="javascript:window.open('MonitorListManage.aspx'); ">监测点管理</span>
-        <span class="Menu" onclick="javascript:openConfigWindow();">设置</span>
-        <span class="Menu" onclick="javascript:openLoginWindow();">退出</span>
+        <span class="Menu" onclick="javascript:window.open('MonitorListManage.aspx'); ">设备管理</span>
+        <span class="Menu" onclick="javascript:openConfigWindow();">系统设置</span>
+        <span class="Menu" onclick="javascript:openLoginWindow();">退出系统</span>
     </div>
     <div id="div_stage">        
         <div id="div_MonitorList">
-            <ul class="tabs">  
-                <li class="active"><a href="#div_List">列表</a></li>  
-                <li><a href="#container">图表</a></li>  
+            <ul class="tabs">                  
+                <li class="active"><a href="#container">图表</a></li>  
+                <li><a href="#div_List">列表</a></li>  
             </ul>
             <div class="tab_container">  
-                <div id="div_List" class="tab_content" style="display: block; ">
-                </div>
-			    <div id="container" class="tab_content" style="display: none; width:380px;"></div>
+                <div id="container" class="tab_content" style="display: block; "></div>
+			    <div id="div_List" class="tab_content" style="display: none; width:380px;"></div>
            </div>
         </div>
         <div id="div_BaiduMap"></div>
@@ -170,7 +235,7 @@
                 <asp:Label ID="Label5" runat="server" Text="系统设置"></asp:Label>
             <div id="DivAlarm" class ="DivLogin">
                 <asp:Label ID="Label6" runat="server" Text="报警上限：" ></asp:Label>
-                <asp:TextBox ID="txAlarmUpper" runat="server" Text="0.3"  CssClass="Txt" MaxLength="10" Width="150px"></asp:TextBox></div>
+                <asp:TextBox ID="txAlarmUpper" runat="server" Text="0.22"  CssClass="Txt" MaxLength="10" Width="150px"></asp:TextBox></div>
              <div id="DivSave" class ="DivLogin">
                 <asp:Button ID="btnSaveConfig" OnClientClick="SetLevelData();" runat="server" Text="保存" CssClass="BTN" Width="120px" /></div>
              
@@ -178,14 +243,14 @@
         <a href="javascript:closeConfigWindow();">关闭</a>
     </div>
     </div>
-        <script src="/js/jquery-1.4.4.min.js" type="text/javascript"></script>
+        
         <script src="/js/jquery.messager.js" type="text/javascript"></script>
         <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KGEgH0KtySkG09bItE7MGLGn0npqjEEc"></script>
         <script type="text/javascript">
             var objLogo = GetObj("div_logo");
             var objMenu = GetObj("div_Menu");
             var objStage = GetObj("div_stage");
-            var AlarmLevel = 0.3;
+            var AlarmLevel = 0.22;
             var location_x = 22.514977;
             var location_y = 113.425883;
 
@@ -375,19 +440,7 @@
                 this.size = function () {
                     return this.keys.length;
                 };
-            }
-
-            function ChartData(name,value) {
-                this.Name = name;
-                this.Value = value;
-                return this;
-            }
-
-            function ChartSerie(name, data) {
-                this.Name = name;
-                this.Data = data;
-                return this;
-            }
+            }            
 
             function ShowAlarm(title,msg)
             {

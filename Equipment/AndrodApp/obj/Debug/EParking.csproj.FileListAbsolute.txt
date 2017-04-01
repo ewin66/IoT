@@ -1,0 +1,14 @@
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\res\layout\main.xml
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\res\values\strings.xml
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\res\drawable\icon.png
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\R.cs.flag
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\uploadflags.txt
+F:\Source\IoT\Equipment\AndrodApp\bin\Debug\EParking.EParking.apk
+F:\Source\IoT\Equipment\AndrodApp\bin\Debug\EParking.EParking-Signed.apk
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\android\bin\EParking.EParking.apk
+F:\Source\IoT\Equipment\AndrodApp\bin\Debug\EParking.dll
+F:\Source\IoT\Equipment\AndrodApp\bin\Debug\EParking.pdb
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\EParking.dll
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\EParking.pdb
+F:\Source\IoT\Equipment\AndrodApp\obj\Debug\EParking.dll.mdb
+F:\Source\IoT\Equipment\AndrodApp\bin\Debug\EParking.dll.mdb
