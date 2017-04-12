@@ -76,7 +76,7 @@
                     text: '车位使用率统计'
                 },
                 subtitle: {
-                    text: '通过拖动下方图表选择区域'},
+                    text: ''},
                 xAxis: {
                     type: 'datetime',
                     showLastTickLabel: true,
@@ -86,22 +86,24 @@
                     }
                 },
                 yAxis: {
-                    gridLineWidth: 0,
+                    title: { text: '' },
                     labels: {
-                        enabled: false
-                    },
-                    title: {
-                        text: null
+                       
+                            formatter: function () {
+                                return this.value*100 + '%';//y轴加上%  
+                            }
+                       
                     },
                     min: 0,
-                    showFirstLabel: false
+                    max:1,
+                    showFirstLabel: true
                 },
                 tooltip: {
                     formatter: function () {
                         var point = this.points[0];
                         return '<b>' + point.series.name + '</b><br/>' +
                             Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                            Highcharts.numberFormat(point.y, 2);
+                            Highcharts.numberFormat(point.y, 2)*100 + '%';
                     },
                     shared: true
                 },

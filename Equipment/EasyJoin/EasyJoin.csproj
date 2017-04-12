@@ -25,6 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -83,6 +84,8 @@
       <HintPath>..\..\..\XTHospatal\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -198,6 +201,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ShowChart.aspx" />
+    <Content Include="WCFService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +243,7 @@
     <Compile Include="GetParkingState.ashx.cs">
       <DependentUpon>GetParkingState.ashx</DependentUpon>
     </Compile>
+    <Compile Include="IWCFService.cs" />
     <Compile Include="Map.aspx.cs">
       <DependentUpon>Map.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -284,8 +289,13 @@
     <Compile Include="ShowChart.aspx.designer.cs">
       <DependentUpon>ShowChart.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WCFService.svc.cs">
+      <DependentUpon>WCFService.svc</DependentUpon>
+    </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Code\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">
       <Project>{ed96e12a-583a-4f4a-b126-018359080d3a}</Project>

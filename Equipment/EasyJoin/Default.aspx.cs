@@ -52,7 +52,7 @@ namespace EasyJoin
                         + tbparkingList.Rows[i]["UPDATETIME"].ToString() + @"
 当前状态维持:"
                         + string.Format("{0}天{1}小时{2}分钟{3}秒", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
-                    btn.ToolTip = toolTip;
+                    btn.ToolTip = "";//toolTip;
                     btn.Height = int.Parse(tbparkingList.Rows[i]["WEBHEIGHT"].ToString());
                     btn.Width = int.Parse(tbparkingList.Rows[i]["WEBWIDTH"].ToString());
                     btn.Style.Value = string.Format("position: relative; top:{0}px; left:{1}px;readonly=true;"

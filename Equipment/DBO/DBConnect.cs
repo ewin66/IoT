@@ -182,6 +182,73 @@ namespace DBO
             }
         }
 
+        public static string ExecuteSql(string strSql, params MySqlParameter[] cmdParms)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(strSql, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        UtilityLog.WriteErrLogWithLog4Net(ex);
+                        return "E11001";//数据库服务器链接错误！
+                    }
+                    try
+                    {
+                        PrepareCommand(cmd, connection, null, strSql, cmdParms);
+                        int intRows = cmd.ExecuteNonQuery();
+                        if (intRows > 0)
+                        {
+                            return "0";
+                        }
+                        return "W11003";//操作成功，但沒有任何数据被更新。
+                    }
+                    catch (MySqlException ex)
+                    {
+                        UtilityLog.WriteErrLogWithLog4Net(ex);
+                        return "E11002";//操作数据库时发生错误！
+                    }
+                    catch (Exception ex)
+                    {
+                        UtilityLog.WriteErrLogWithLog4Net(ex);
+                        return "E11002";//操作数据库时发生错误！
+                    }
+                }
+            }
+        }
+        private static void PrepareCommand(MySqlCommand cmd, MySqlConnection conn, MySqlTransaction trans, string cmdText, MySqlParameter[] cmdParms)
+        {
+            if (conn == null)
+            {
+                conn = new MySqlConnection(connectionString);
+            }
+            if (conn.State != ConnectionState.Open)
+            {
+                conn.Open();
+            }
+            cmd.Connection = conn;
+            cmd.CommandText = cmdText;
+            if (trans != null)
+            {
+                cmd.Transaction = trans;
+            }
+            cmd.CommandType = CommandType.Text;//cmdType;
+            if (cmdParms != null)
+            {
+                cmd.Parameters.Clear();
+                foreach (MySqlParameter parm in cmdParms)
+                {
+                    cmd.Parameters.Add(parm);
+                }
+            }
+        }
+
+
+
         public static object GetSingle(string strSql)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))

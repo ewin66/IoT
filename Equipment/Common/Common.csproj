@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\AutoinoutInfoEntity.cs" />
     <Compile Include="Entity\BaiduApiControl.cs" />
     <Compile Include="Entity\BaiduApiEntity.cs" />
     <Compile Include="Entity\MonitorDataEntity.cs" />
     <Compile Include="Entity\MonitorEntity.cs" />
+    <Compile Include="Entity\ParkingInfoEntity.cs" />
     <Compile Include="YMethod.cs" />
     <Compile Include="Method.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,17 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using DBO;
 using Common;
+using Common.Entity;
 using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace Business
 {
     public class Parking
     {
-        private static string updateParkingStateSQL = @"Update ParkingState Set STATE='{0}',UPDATETIME=now() Where WPSD_ID = '{1}';";
+        #region SQL
 
-        private static string InsertParkingHistoryWithRssiSQL = @"INSERT INTO ParkingHistory(WPSD_ID,STATE,UPDATETIME)VALUE('{0}','{1}', now());";
+        private static string updateParkingStateSQL = @"Update ParkingState Set ChangeTime=if(STATE ='{0}' and not isnull(ChangeTime), ChangeTime ,now()), STATE='{0}',UPDATETIME=now() Where WPSD_ID = '{1}';";
 
-        private static string InsertParkingHistorySQL = @"INSERT INTO ParkingHistory(WPSD_ID,STATE,UPDATETIME,RSSI,Battery)VALUE('{0}','{1}', now(),{2},{3});";
+        private static string updateParkingStateWithRSSISQL = @"Update ParkingState Set ChangeTime=if(STATE ='{0}' and not isnull(ChangeTime), ChangeTime ,now()), STATE='{0}',UPDATETIME=now(),RSSI={1},Battery={2} Where WPSD_ID = '{3}';";
+
+        private static string InsertParkingHistorySQL = @"INSERT INTO ParkingHistory(WPSD_ID,STATE,UPDATETIME)VALUE('{0}','{1}', now());";
+
+        private static string InsertParkingHistoryWithRssiSQL = @"INSERT INTO ParkingHistory(WPSD_ID,STATE,UPDATETIME,RSSI,Battery)VALUE('{0}','{1}', now(),{2},{3});";
 
         private static string UpdateParkingHistorySQL = @"Update ParkingHistory Set UPDATETIME=now(),Times=Times+1 Where ID = {0}";
 
@@ -24,9 +30,6 @@ namespace Business
         private static string GetParkingHistorySQL = @"Select * From ParkingHistory 
 Where WPSD_ID = '{0}' 
 Order By UPDATETIME Desc LIMIT 2;";
-
-        private static string updateParkingStateWithRSSISQL = @"Update ParkingState Set ChangeTime=if(STATE='{0}' and ChangeTime!=null, ChangeTime ,now()), STATE='{0}',UPDATETIME=now(),RSSI={1},Battery={2} Where WPSD_ID = '{3}';";
-
 
         private static string getParkingStateSQL = @"Select * From parkingstate
 Where PARKINGLOT_ID = '{0}' ORDER BY PARKINGNAME Desc;";
@@ -74,6 +77,12 @@ From parkingoccupy
 Where PARKINGLOT_ID='{0}' 
 Order By UpdateTime DESC LIMIT 2)";
 
+        private static string InsertAutoinoutInfoSQL = @"";
+
+        #endregion
+
+        #region Method
+
         public bool UpdateParkingState(string WPSD_ID, string STATE)
         {
             string sql = string.Empty;
@@ -96,13 +105,13 @@ Order By UpdateTime DESC LIMIT 2)";
                         if (STATE == State1)
                         {
                             //一致 
-                            //是否最后两天条数据一致
+                            //是否最后两条数据一致
                             if (State1 == State2)
                             {
                                 //一致 
-                                //更新第二条（时间、Times）
+                                //更新最后一条数据（时间、Times）
                                 string ID = tb.Rows[0]["ID"].ToString();
-                                sql = string.Format(UpdateParkingOccupySQL, ID);
+                                sql = string.Format(UpdateParkingHistorySQL, ID);
                                 strResoult = DBConnect.ExecuteSql(sql);
                                 if (strResoult == "0")
                                 {
@@ -113,7 +122,7 @@ Order By UpdateTime DESC LIMIT 2)";
                             {
                                 //不一致 
                                 //添加一条相同数据
-                                sql = string.Format(InsertParkingHistoryWithRssiSQL, WPSD_ID, STATE);
+                                sql = string.Format(InsertParkingHistorySQL, WPSD_ID, STATE);
                                 strResoult = DBConnect.ExecuteSql(sql);
                                 if (strResoult == "0")
                                 {
@@ -125,7 +134,7 @@ Order By UpdateTime DESC LIMIT 2)";
                         {
                             //不一致 
                             //添加一条新数据
-                            sql = string.Format(InsertParkingHistoryWithRssiSQL, WPSD_ID, STATE);
+                            sql = string.Format(InsertParkingHistorySQL, WPSD_ID, STATE);
                             strResoult = DBConnect.ExecuteSql(sql);
                             if (strResoult == "0")
                             {
@@ -136,7 +145,7 @@ Order By UpdateTime DESC LIMIT 2)";
                 }
                 else
                 {
-                    sql = string.Format(InsertParkingHistoryWithRssiSQL, WPSD_ID, STATE);
+                    sql = string.Format(InsertParkingHistorySQL, WPSD_ID, STATE);
                     strResoult = DBConnect.ExecuteSql(sql);
                     if (strResoult == "0")
                     {
@@ -146,7 +155,6 @@ Order By UpdateTime DESC LIMIT 2)";
             }
             return re;
         }
-
         public bool UpdateParkingState(string WPSD_ID,string RSSI, string Voltage, string STATE)
         {
             string sql = string.Empty;
@@ -163,7 +171,6 @@ Order By UpdateTime DESC LIMIT 2)";
                 if (resoult.NoError)
                 {
                     if (resoult.Count >= 2)
-
                     {
                         DataTable tb = resoult.ResultDataSet.Tables[0];
 
@@ -184,7 +191,7 @@ Order By UpdateTime DESC LIMIT 2)";
                                 //一致 
                                 //更新第二条（时间、Times）
                                 string ID = tb.Rows[0]["ID"].ToString();
-                                sql = string.Format(UpdateParkingOccupySQL, ID);
+                                sql = string.Format(UpdateParkingHistorySQL, ID);
                                 strResoult = DBConnect.ExecuteSql(sql);
                                 if (strResoult == "0")
                                 {
@@ -195,7 +202,7 @@ Order By UpdateTime DESC LIMIT 2)";
                             {
                                 //不一致 
                                 //添加一条相同数据
-                                sql = string.Format(InsertParkingHistorySQL, WPSD_ID, STATE, RSSI, Voltage);
+                                sql = string.Format(InsertParkingHistoryWithRssiSQL, WPSD_ID, STATE, RSSI, Voltage);
                                 strResoult = DBConnect.ExecuteSql(sql);
                                 if (strResoult == "0")
                                 {
@@ -207,7 +214,7 @@ Order By UpdateTime DESC LIMIT 2)";
                         {
                             //不一致 
                             //添加一条新数据
-                            sql = string.Format(InsertParkingHistorySQL, WPSD_ID, STATE, RSSI, Voltage);
+                            sql = string.Format(InsertParkingHistoryWithRssiSQL, WPSD_ID, STATE, RSSI, Voltage);
                             strResoult = DBConnect.ExecuteSql(sql);
                             if (strResoult == "0")
                             {
@@ -217,7 +224,7 @@ Order By UpdateTime DESC LIMIT 2)";
                     }
                     else
                     {
-                        sql = string.Format(InsertParkingHistorySQL, WPSD_ID, STATE, RSSI, Voltage);
+                        sql = string.Format(InsertParkingHistoryWithRssiSQL, WPSD_ID, STATE, RSSI, Voltage);
                         strResoult = DBConnect.ExecuteSql(sql);
                         if (strResoult == "0")
                         {
@@ -228,7 +235,6 @@ Order By UpdateTime DESC LIMIT 2)";
             }
             return re;
         }
-
         public bool UpdateParkingOccupy(string parkingID)
         {
             string sql = string.Empty;
@@ -283,7 +289,7 @@ Order By UpdateTime DESC LIMIT 2)";
                         {
                             //不一致 
                             //添加一条相同数据
-                            sql = string.Format(UpdateParkingHistorySQL, parkingID, Vacant0, Occupy0);
+                            sql = string.Format(InsertRepeatParkingOccupySQL, parkingID, Vacant0, Occupy0);
                             string strResoult = DBConnect.ExecuteSql(sql);
                             if (strResoult == "0")
                             {
@@ -315,7 +321,6 @@ Order By UpdateTime DESC LIMIT 2)";
             }
             return re;
         }
-
         public bool AddorUpdateParking(string ParkingLot_ID, string WPSD_ID, string parkingName, int height, int width, int X, int Y)
         {
             string sql = string.Empty;
@@ -357,7 +362,6 @@ Order By UpdateTime DESC LIMIT 2)";
                 return false;
             }
         }
-
         public bool UpdateParking(string WPSD_ID, bool STATE)
         {
             if (STATE)//
@@ -369,7 +373,6 @@ Order By UpdateTime DESC LIMIT 2)";
                 return UpdateParkingState(WPSD_ID, "2");
             }
         }
-
         public bool UpdateParking(string WPSD_ID,string RSSI,string Voltage, bool STATE)
         {
             if (STATE)//
@@ -381,12 +384,10 @@ Order By UpdateTime DESC LIMIT 2)";
                 return UpdateParkingState(WPSD_ID, RSSI, Voltage, "2");
             }
         }
-
         public ReturnValue GetParkingState(string PARKINGLOT_ID)
         {
             return DBConnect.Select(string.Format(getParkingStateSQL, PARKINGLOT_ID));
         }
-
         public ReturnValue GetParkingOccupy(string PARKINGLOT_ID)
         {
             string where = "";
@@ -396,5 +397,115 @@ Order By UpdateTime DESC LIMIT 2)";
             }
             return DBConnect.Select(GetParkingOccupySQL.Replace("@@@",where));
         }
+        public bool AddParkingInfo(ParkingInfoEntity model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("Insert into parkinginfo(");
+            strSql.Append("ParkingID,ParkingName,Lat,Lon,Position,ServerAddress,Manager,PhoneNum,Email,TotleNum,FreeNum,FeeScale,UpdateDataTime,CreateDataTime)");
+            strSql.Append(" values (");
+            strSql.Append("@ParkingID,@ParkingName,@Lat,@Lon,@Position,@ServerAddress,@Manager,@PhoneNum,@Email,@TotleNum,@FreeNum,@FeeScale,now(),now())");
+            MySqlParameter[] parameters = {
+                    new MySqlParameter("@ParkingID", MySqlDbType.VarChar,20),
+                    new MySqlParameter("@ParkingName", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@Lat", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@Lon", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@Position", MySqlDbType.VarChar,200),
+                    new MySqlParameter("@ServerAddress", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@Manager", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@PhoneNum", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@Email", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@TotleNum", MySqlDbType.Int32,11),
+                    new MySqlParameter("@FreeNum", MySqlDbType.Int32,11),
+                    new MySqlParameter("@FeeScale", MySqlDbType.VarChar,100)};
+            parameters[0].Value = model.ParkingID;
+            parameters[1].Value = model.ParkingName;
+            parameters[2].Value = model.Lat;
+            parameters[3].Value = model.Lon;
+            parameters[4].Value = model.Position;
+            parameters[5].Value = model.ServerAddress;
+            parameters[6].Value = model.Manager;
+            parameters[7].Value = model.PhoneNum;
+            parameters[8].Value = model.Email;
+            parameters[9].Value = model.TotleNum;
+            parameters[10].Value = model.FreeNum;
+            parameters[11].Value = model.FeeScale;
+
+            string strResoult = DBConnect.ExecuteSql(strSql.ToString(), parameters);
+            if (strResoult == "0")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool AutoIn(AutoinoutInfoEntity model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into autoinoutinfo(");
+            strSql.Append("ParkingID,DoorIn,DoorOut,CarNo,InTime,OutTime,State,TimeLong,TotalCost,PreCost,FinalCost,Model,UpdateTime)");
+            strSql.Append(" values (");
+            strSql.Append("@ParkingID,@DoorIn,null,@CarNo,now(),null,'0',null,null,null,null,null,now())");
+            MySqlParameter[] parameters = {
+                    new MySqlParameter("@ParkingID", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@DoorIn", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@CarNo", MySqlDbType.VarChar,50)};
+            parameters[0].Value = model.ParkingID;
+            parameters[1].Value = model.DoorIn;
+            parameters[2].Value = model.CarNo;
+
+            string strResoult = DBConnect.ExecuteSql(strSql.ToString(), parameters);
+            if (strResoult == "0")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool AutoOut(AutoinoutInfoEntity model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update autoinoutinfo set ");
+            strSql.Append("DoorOut=@DoorOut,");
+            strSql.Append("OutTime=Now(),");
+            strSql.Append("State='1',");
+            strSql.Append("TimeLong=TIMESTAMPDIFF(MINUTE,InTime,Now()),");
+            strSql.Append("TotalCost=@TotalCost,");
+            strSql.Append("PreCost=@PreCost,");
+            strSql.Append("FinalCost=@TotalCost-@PreCost,");
+            strSql.Append("Model=@Model,");
+            strSql.Append("UpdateTime=Now()");
+            strSql.Append(" Where ParkingID=@ParkingID and  CarNo=@CarNo and State='0'");
+            MySqlParameter[] parameters = {
+                    new MySqlParameter("@ParkingID", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@DoorOut", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@CarNo", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@TotalCost", MySqlDbType.Float),
+                    new MySqlParameter("@PreCost", MySqlDbType.Float),
+                    new MySqlParameter("@Model", MySqlDbType.VarChar,50)};
+            parameters[0].Value = model.ParkingID;
+            parameters[1].Value = model.DoorOut;
+            parameters[2].Value = model.CarNo;
+            parameters[3].Value = model.TotalCost;
+            parameters[4].Value = model.PreCost;
+            parameters[5].Value = model.Model;
+
+            string strResoult = DBConnect.ExecuteSql(strSql.ToString(), parameters);
+            if (strResoult == "0")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

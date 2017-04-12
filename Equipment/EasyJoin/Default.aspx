@@ -36,7 +36,7 @@
                         occupy+=1;
                     }
                     toolTip = data[i]["ToolTip"];
-                    $("#" + data[i]["WPSD_ID"]).css("ToolTip", toolTip);
+                    $("#" + data[i]["WPSD_ID"]).attr("title", toolTip);
                     total += 1;
                 }
                 $("#lbInfo").text("车位总数：" + total + " 占用：" + occupy + " 空闲：" + vacant + "      更新时间：" + t);
