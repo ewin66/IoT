@@ -1,12 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
-您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
-来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+此文件由 Web 项目的发布/打包过程使用。可以通过编辑此 MSBuild 文件
+自定义此过程的行为。为了解与此相关的更多内容，请访问 https://go.microsoft.com/fwlink/?LinkID=208121。 
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>F:\Source\WebSite</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\Source\WebSite</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="AddMonitor.aspx">
@@ -25,10 +24,16 @@
       <publishTime>11/30/2016 22:23:24</publishTime>
     </File>
     <File Include="bin/Business.dll">
-      <publishTime>04/12/2017 22:26:26</publishTime>
+      <publishTime>01/27/2018 23:09:16</publishTime>
+    </File>
+    <File Include="bin/Business.pdb">
+      <publishTime>01/27/2018 23:09:16</publishTime>
     </File>
     <File Include="bin/Common.dll">
-      <publishTime>04/12/2017 22:26:26</publishTime>
+      <publishTime>01/27/2018 23:09:15</publishTime>
+    </File>
+    <File Include="bin/Common.pdb">
+      <publishTime>01/27/2018 23:09:15</publishTime>
     </File>
     <File Include="bin/CSS/fd-slider-tooltip.css">
       <publishTime>11/29/2016 18:06:30</publishTime>
@@ -43,10 +48,16 @@
       <publishTime>11/29/2016 17:26:51</publishTime>
     </File>
     <File Include="bin/DBO.dll">
-      <publishTime>04/12/2017 22:26:26</publishTime>
+      <publishTime>01/27/2018 23:09:16</publishTime>
+    </File>
+    <File Include="bin/DBO.pdb">
+      <publishTime>01/27/2018 23:09:16</publishTime>
     </File>
     <File Include="bin/EasyJoin.dll">
-      <publishTime>04/12/2017 23:25:13</publishTime>
+      <publishTime>01/27/2018 23:09:17</publishTime>
+    </File>
+    <File Include="bin/EasyJoin.pdb">
+      <publishTime>01/27/2018 23:09:17</publishTime>
     </File>
     <File Include="bin/Js/excanvas.compiled.js">
       <publishTime>11/29/2016 18:08:36</publishTime>
@@ -201,14 +212,14 @@
     <File Include="GetParkingState.ashx">
       <publishTime>03/15/2017 23:47:15</publishTime>
     </File>
+    <File Include="HealthMap.aspx">
+      <publishTime>01/04/2018 00:07:20</publishTime>
+    </File>
     <File Include="Image/B.jpg">
       <publishTime>03/15/2017 23:49:42</publishTime>
     </File>
     <File Include="Image/bg.png">
       <publishTime>11/29/2016 18:21:18</publishTime>
-    </File>
-    <File Include="index.html">
-      <publishTime>12/06/2016 23:59:31</publishTime>
     </File>
     <File Include="Js/excanvas.compiled.js">
       <publishTime>11/29/2016 18:08:36</publishTime>
@@ -277,13 +288,19 @@
       <publishTime>02/22/2017 18:07:48</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>12/10/2016 23:19:24</publishTime>
+      <publishTime>01/27/2018 13:09:15</publishTime>
+    </File>
+    <File Include="ParkingLock.aspx">
+      <publishTime>01/27/2018 14:20:06</publishTime>
     </File>
     <File Include="ParkingOccupy.aspx">
       <publishTime>04/05/2017 11:07:03</publishTime>
     </File>
     <File Include="ParkingVacant.aspx">
       <publishTime>03/31/2017 23:16:31</publishTime>
+    </File>
+    <File Include="Position.ashx">
+      <publishTime>01/04/2018 00:01:41</publishTime>
     </File>
     <File Include="scripts/ai.0.22.19-build00125.js">
       <publishTime>10/20/2016 22:34:49</publishTime>
@@ -298,7 +315,7 @@
       <publishTime>04/12/2017 17:52:39</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/12/2017 22:50:01</publishTime>
+      <publishTime>01/27/2018 23:10:18</publishTime>
     </File>
   </ItemGroup>
 </Project>

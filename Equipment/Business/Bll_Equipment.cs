@@ -41,6 +41,27 @@ LEFT JOIN BAS_EQUIPMENT_TYPE T ON T.ID = E.EQUIPMENT_TYPE_ID
 LEFT JOIN BAS_EQUIPMENT_MODEL M ON M.ID = E.EQUIPMENT_MODEL_ID
 AND M.EQUIPMENT_TYPE_ID = E.EQUIPMENT_TYPE_ID";
 
+        static string SQL_GetPositionList = @"SELECT
+    E.ID,
+	E.EQUIPMENT_TYPE_ID,
+	T.EQUIPMENT_TYPE_NAME,
+	E.EQUIPMENT_MODEL_ID,
+	M.EQUIPMENT_MODEL_NAME,
+	E.COMMUNICATION_NO,
+    E.ENAME,
+	E.LATITUDE,
+	E.LONGITUDE,
+	E.POSITION,
+	E.JOIN_TIME,
+	E.JOINER,
+	E.ADDRESS_NO,
+	E.STATE
+FROM
+    healthmap E
+LEFT JOIN BAS_EQUIPMENT_TYPE T ON T.ID = E.EQUIPMENT_TYPE_ID
+LEFT JOIN BAS_EQUIPMENT_MODEL M ON M.ID = E.EQUIPMENT_MODEL_ID
+AND M.EQUIPMENT_TYPE_ID = E.EQUIPMENT_TYPE_ID";
+
         static string SQL_GetEquipmentInfo = @"SELECT
     E.ID,
 	E.EQUIPMENT_TYPE_ID,
@@ -153,6 +174,11 @@ GROUP BY E.ID";
         public ReturnValue GetEquipmentList()
         {
             return DBConnect.Select(SQL_GetEquipmentList);
+        }
+
+        public ReturnValue GetPositionList()
+        {
+            return DBConnect.Select(SQL_GetPositionList);
         }
 
         public ReturnValue GetEquipmentInfo(string ID)

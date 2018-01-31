@@ -16,7 +16,7 @@ namespace Equipment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Equipment());
+            Application.Run(new Picture485());
         }
     }
 }

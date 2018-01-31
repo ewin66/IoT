@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EasyJoin</RootNamespace>
     <AssemblyName>EasyJoin</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -26,6 +26,7 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +38,7 @@
     <WarningLevel>4</WarningLevel>
     <PublishDatabases>false</PublishDatabases>
     <IncludeIisSettings>false</IncludeIisSettings>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -84,6 +87,7 @@
       <HintPath>..\..\..\XTHospatal\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
@@ -92,9 +96,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -119,6 +123,8 @@
     <Content Include="Default.aspx" />
     <Content Include="EasyJoin.aspx" />
     <Content Include="EasyJoinService.asmx" />
+    <Content Include="Global.asax" />
+    <Content Include="HealthMap.aspx" />
     <Content Include="Image\B.jpg" />
     <Content Include="Image\bg.png" />
     <Content Include="Js\excanvas.compiled.js">
@@ -157,6 +163,7 @@
     <Content Include="Js\prettify.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Js\socket.io.js" />
     <Content Include="Js\theme\dark-blue.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -182,6 +189,8 @@
     <Content Include="MonitorData.ashx" />
     <Content Include="GetParkingState.ashx" />
     <Content Include="GetParkingOccupy.ashx" />
+    <Content Include="ParkingLock.aspx" />
+    <Content Include="Position.ashx" />
     <None Include="Properties\PublishProfiles\web.config.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -208,6 +217,7 @@
     <Compile Include="AlamInfo.ashx.cs">
       <DependentUpon>AlamInfo.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Code\CommonMethod.cs" />
     <Compile Include="CreateImgCode.aspx.cs">
       <DependentUpon>CreateImgCode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -243,6 +253,16 @@
     <Compile Include="GetParkingState.ashx.cs">
       <DependentUpon>GetParkingState.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HealthMap.aspx.cs">
+      <DependentUpon>HealthMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HealthMap.aspx.designer.cs">
+      <DependentUpon>HealthMap.aspx</DependentUpon>
+    </Compile>
     <Compile Include="IWCFService.cs" />
     <Compile Include="Map.aspx.cs">
       <DependentUpon>Map.aspx</DependentUpon>
@@ -265,6 +285,13 @@
       <DependentUpon>MonitorListManage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ParkingButton.cs" />
+    <Compile Include="ParkingLock.aspx.cs">
+      <DependentUpon>ParkingLock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ParkingLock.aspx.designer.cs">
+      <DependentUpon>ParkingLock.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ParkingOccupy.aspx.cs">
       <DependentUpon>ParkingOccupy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -281,6 +308,9 @@
     <Compile Include="ParkingVacant.aspx.designer.cs">
       <DependentUpon>ParkingVacant.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Position.ashx.cs">
+      <DependentUpon>Position.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowChart.aspx.cs">
       <DependentUpon>ShowChart.aspx</DependentUpon>
@@ -293,9 +323,7 @@
       <DependentUpon>WCFService.svc</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Code\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">
       <Project>{ed96e12a-583a-4f4a-b126-018359080d3a}</Project>

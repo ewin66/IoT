@@ -13,9 +13,6 @@ namespace EasyJoin
     public interface IWCFService
     {
         [OperationContract]
-        void DoWork();
-
-        [OperationContract]
         bool AutoIn(AutoinoutInfoEntity model);
 
         [OperationContract]

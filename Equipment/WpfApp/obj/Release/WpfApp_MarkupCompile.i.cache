@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\Source\IoT\Equipment\WpfApp\obj\Release\
+E:\Source\IoT\Equipment\WpfApp\obj\Release\
 WpfApp
 none
 false
 TRACE
-F:\Source\IoT\Equipment\WpfApp\App.xaml
+E:\Source\IoT\Equipment\WpfApp\App.xaml
 2-552705533
 
-10-301348656
+10-1976401100
 13738642453
 MainWindow.xaml;OnOff.xaml;
 
-False
+True
 

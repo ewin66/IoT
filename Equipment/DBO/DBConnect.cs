@@ -144,6 +144,43 @@ namespace DBO
             }
         }
 
+        public static ReturnValue Select(string sql, params MySqlParameter[] cmdParms)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                }
+                catch (MySqlException ex)
+                {
+                    UtilityLog.WriteErrLogWithLog4Net(ex);
+                    return new ReturnValue(false, "E11001");//数据库服务器链接错误！
+                }
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                {
+                    try
+                    {
+                        DataSet dsQuery = new DataSet();
+                        PrepareCommand(cmd, connection, null, sql, cmdParms);
+                        da.Fill(dsQuery, "Result");
+                        return new ReturnValue(true, "", dsQuery, dsQuery.Tables[0].Rows.Count);
+                    }
+                    catch (MySqlException ex)
+                    {
+                        UtilityLog.WriteErrLogWithLog4Net(ex);
+                        return new ReturnValue(false, "E11002");//操作数据库时发生错误！.
+                    }
+                    catch (Exception ex)
+                    {
+                        UtilityLog.WriteErrLogWithLog4Net(ex);
+                        return new ReturnValue(false, "E11002");//操作数据库时发生错误！.
+                    }
+                }
+            }
+        }
+
         public static string ExecuteSql(string strSql)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))

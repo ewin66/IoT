@@ -4,3 +4,9 @@ F:\Source\IoT\Equipment\Common\bin\Debug\log4net.dll
 F:\Source\IoT\Equipment\Common\obj\Debug\Common.dll
 F:\Source\IoT\Equipment\Common\obj\Debug\Common.pdb
 F:\Source\IoT\Equipment\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+E:\Source\IoT\Equipment\Common\bin\Debug\Common.dll
+E:\Source\IoT\Equipment\Common\bin\Debug\Common.pdb
+E:\Source\IoT\Equipment\Common\bin\Debug\log4net.dll
+E:\Source\IoT\Equipment\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+E:\Source\IoT\Equipment\Common\obj\Debug\Common.dll
+E:\Source\IoT\Equipment\Common\obj\Debug\Common.pdb

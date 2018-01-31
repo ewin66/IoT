@@ -1,0 +1,9 @@
+E:\Source\IoT\Equipment\ParkingLockServer\bin\Debug\ParkingLockServer.exe.config
+E:\Source\IoT\Equipment\ParkingLockServer\bin\Debug\ParkingLockServer.exe
+E:\Source\IoT\Equipment\ParkingLockServer\bin\Debug\ParkingLockServer.pdb
+E:\Source\IoT\Equipment\ParkingLockServer\obj\Debug\ParkingLockServer.Properties.Resources.resources
+E:\Source\IoT\Equipment\ParkingLockServer\obj\Debug\ParkingLockServer.csproj.GenerateResource.Cache
+E:\Source\IoT\Equipment\ParkingLockServer\obj\Debug\ParkingLockServer.csproj.CoreCompileInputs.cache
+E:\Source\IoT\Equipment\ParkingLockServer\obj\Debug\ParkingLockServer.exe
+E:\Source\IoT\Equipment\ParkingLockServer\obj\Debug\ParkingLockServer.pdb
+E:\Source\IoT\Equipment\ParkingLockServer\obj\Debug\ParkingLockServer.FormServer.resources

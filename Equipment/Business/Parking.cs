@@ -64,7 +64,7 @@ Value('{0}',now(),{1},{2})";
 
         private static string UpdateParkingOccupySQL = @"Update ParkingOccupy set UpdateTime = now(),Times = Times+1 where ID= {0}";
 
-        private static string GetParkingOccupySQL = @"Select * from ParkingOccupy where 1=1 @@@ order by UpdateTime LIMIT 720";
+        private static string GetParkingOccupySQL = @"select * from (Select * from ParkingOccupy where 1=1 @@@ order by UpdateTime desc LIMIT 720) A order by UpdateTime";
 
         private static string GetRepeatParkingOccupySQL = @"select -1 as ID,PARKINGLOT_ID,null as UpdateTime,max(case STATE when '1' then Number else 0 end) as Vacant,
 max(case STATE when '2' then Number else 0 end) as Occupy from
@@ -470,39 +470,84 @@ Order By UpdateTime DESC LIMIT 2)";
         public bool AutoOut(AutoinoutInfoEntity model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update autoinoutinfo set ");
-            strSql.Append("DoorOut=@DoorOut,");
-            strSql.Append("OutTime=Now(),");
-            strSql.Append("State='1',");
-            strSql.Append("TimeLong=TIMESTAMPDIFF(MINUTE,InTime,Now()),");
-            strSql.Append("TotalCost=@TotalCost,");
-            strSql.Append("PreCost=@PreCost,");
-            strSql.Append("FinalCost=@TotalCost-@PreCost,");
-            strSql.Append("Model=@Model,");
-            strSql.Append("UpdateTime=Now()");
-            strSql.Append(" Where ParkingID=@ParkingID and  CarNo=@CarNo and State='0'");
-            MySqlParameter[] parameters = {
+            string ID = string.Empty;
+            strSql.Append("select ID from autoinoutinfo ");
+            strSql.Append(" Where ParkingID=@ParkingID and  CarNo=@CarNo and State='0' LIMIT 1");
+            MySqlParameter[] parameters1 = {
                     new MySqlParameter("@ParkingID", MySqlDbType.VarChar,50),
-                    new MySqlParameter("@DoorOut", MySqlDbType.VarChar,50),
-                    new MySqlParameter("@CarNo", MySqlDbType.VarChar,50),
-                    new MySqlParameter("@TotalCost", MySqlDbType.Float),
-                    new MySqlParameter("@PreCost", MySqlDbType.Float),
-                    new MySqlParameter("@Model", MySqlDbType.VarChar,50)};
-            parameters[0].Value = model.ParkingID;
-            parameters[1].Value = model.DoorOut;
-            parameters[2].Value = model.CarNo;
-            parameters[3].Value = model.TotalCost;
-            parameters[4].Value = model.PreCost;
-            parameters[5].Value = model.Model;
-
-            string strResoult = DBConnect.ExecuteSql(strSql.ToString(), parameters);
-            if (strResoult == "0")
+                    new MySqlParameter("@CarNo", MySqlDbType.VarChar,50) };
+            parameters1[0].Value = model.ParkingID;
+            parameters1[1].Value = model.CarNo;
+            ReturnValue resoult = DBConnect.Select(strSql.ToString(), parameters1);
+            if (!resoult.NoError)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                if (resoult.Count > 0)
+                {
+                    //修改
+                    ID = resoult.ResultDataSet.Tables[0].Rows[0]["ID"].ToString();
+                    strSql.Clear();
+                    strSql.Append("update autoinoutinfo set ");
+                    strSql.Append("DoorOut=@DoorOut,");
+                    strSql.Append("OutTime=Now(),");
+                    strSql.Append("State='1',");
+                    strSql.Append("TimeLong=TIMESTAMPDIFF(MINUTE,InTime,Now()),");
+                    strSql.Append("TotalCost=@TotalCost,");
+                    strSql.Append("PreCost=@PreCost,");
+                    strSql.Append("FinalCost=@TotalCost-@PreCost,");
+                    strSql.Append("Model=@Model,");
+                    strSql.Append("UpdateTime=Now()");
+                    strSql.Append(" Where ID=@ID");
+                    MySqlParameter[] parameters2 = {
+                    new MySqlParameter("@ID", MySqlDbType.Int32),
+                    new MySqlParameter("@DoorOut", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@TotalCost", MySqlDbType.Float),
+                    new MySqlParameter("@PreCost", MySqlDbType.Float),
+                    new MySqlParameter("@Model", MySqlDbType.VarChar,50)};
+                    parameters2[0].Value = ID;
+                    parameters2[1].Value = model.DoorOut;
+                    parameters2[2].Value = model.TotalCost;
+                    parameters2[3].Value = model.PreCost;
+                    parameters2[4].Value = model.Model;
+                    string strResoult = DBConnect.ExecuteSql(strSql.ToString(), parameters2);
+                    if (strResoult == "0")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    //添加
+                    strSql.Clear();
+                    strSql.Append("insert into autoinoutinfo(");
+                    strSql.Append("ParkingID,DoorIn,DoorOut,CarNo,InTime,OutTime,State,TimeLong,TotalCost,PreCost,FinalCost,Model,UpdateTime)");
+                    strSql.Append(" values (");
+                    strSql.Append("@ParkingID,null,@DoorOut,@CarNo,null,now(),'2',null,null,null,null,null,now())");
+                    MySqlParameter[] parameters3 = {
+                    new MySqlParameter("@ParkingID", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@DoorOut", MySqlDbType.VarChar,50),
+                    new MySqlParameter("@CarNo", MySqlDbType.VarChar,50)};
+                    parameters3[0].Value = model.ParkingID;
+                    parameters3[1].Value = model.DoorIn;
+                    parameters3[2].Value = model.CarNo;
+
+                    string strResoult = DBConnect.ExecuteSql(strSql.ToString(), parameters3);
+                    if (strResoult == "0")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
         }
 
